@@ -1,14 +1,20 @@
 from functools import lru_cache
 from copy import copy
 import re
-from .tools import timeit
+from .tools import timeit, totaltimeit
+
+
+@totaltimeit
+def value__(str):
+    return eval(str)
 
 
 @lru_cache(maxsize=None)
 def value(str):
-    return eval(str)
+    return value__(str)
 
 
+@totaltimeit
 def add_solution_to_set(candidate: str, solutions: set[str]) -> set[str]:
     score = len(re.findall(r"\d+", candidate))
     if solutions:
@@ -60,10 +66,12 @@ def loop(expressions: list[str], target: int) -> set[str]:
     return results
 
 
+@totaltimeit
 def make_readable_for_ilyes(msg: str):
     return msg[1:-1].replace("*", "x").replace("//", "÷")
 
 
+@totaltimeit
 def explain(msg: str) -> None:
     while True:
         group_found = False
