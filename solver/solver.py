@@ -99,3 +99,5 @@ def solve(numbers: list[int], target: int) -> int:
         for solution in solutions:
             explain(solution)
             print("--------------")
+    else:
+        print("Pas de solutions exactes")
